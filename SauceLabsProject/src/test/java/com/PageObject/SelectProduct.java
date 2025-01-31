@@ -16,33 +16,29 @@ public class SelectProduct {
 	@FindBy(xpath = "//a[@class='shopping_cart_link']")
 	private WebElement container;
 
-	
-	
-	public void AddProduct(String name) {
+	public void AddProduct() {
 		int x = Add.size();
 		System.out.println(x);
-		System.out.println(name);
-		
-		/*
-		 * for (WebElement product : Add) { name =product.getText(); if
-		 * (product.getText()==name) { product.click();
-		 * 
-		 * } }
-		 */
-		
-		switch (constant.Product) {
-		case "Sauce Labs Bike Light":
-			driver_Manager.getDriver().findElement(By.id("add-to-cart-sauce-labs-bike-light")).click();
-			break;
-		case "Sauce Labs Backpack":
-			driver_Manager.getDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
-		case "Sauce Labs Bolt T-Shirt":
-			driver_Manager.getDriver().findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
-		case "Sauce Labs Fleece Jacket":
-			driver_Manager.getDriver().findElement(By.id("add-to-cart-sauce-labs-fleece-jacket")).click();
-		default:
-			break;
+		System.out.println(constant.Product);
+
+		for (WebElement product : Add) {
+			if (product.getText().equalsIgnoreCase(constant.Product)) {
+				driver_Manager.getDriver().findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+				
+			}
 		}
+
+		/*
+		 * switch (constant.Product) { case "Sauce Labs Bike Light":
+		 * driver_Manager.getDriver().findElement(By.id(
+		 * "add-to-cart-sauce-labs-bike-light")).click(); break; case
+		 * "Sauce Labs Backpack": driver_Manager.getDriver().findElement(By.id(
+		 * "add-to-cart-sauce-labs-backpack")).click(); case "Sauce Labs Bolt T-Shirt":
+		 * driver_Manager.getDriver().findElement(By.id(
+		 * "add-to-cart-sauce-labs-bolt-t-shirt")).click(); case
+		 * "Sauce Labs Fleece Jacket": driver_Manager.getDriver().findElement(By.id(
+		 * "add-to-cart-sauce-labs-fleece-jacket")).click(); default: break; }
+		 */
 
 	}
 

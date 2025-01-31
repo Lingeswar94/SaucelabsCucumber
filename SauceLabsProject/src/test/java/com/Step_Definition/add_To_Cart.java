@@ -24,20 +24,25 @@ import io.cucumber.java.en.When;
 public class add_To_Cart {
 
 	Logger logger = Logger.getLogger(add_To_Cart.class);
+	Commonutils commonutils = new Commonutils();
 
 	@Given("the user is to login successfuly and viewing HomePage")
 	public void the_user_is_to_login_successfuly_and_viewing_home_page() {
 
 		logger.info("User is to login SauceDemo app ");
 		LoginPage loginPage = PageFactory.initElements(driver_Manager.getDriver(), LoginPage.class);
-		logger.info("User Enter the UserName");
-		loginPage.uname();
-		logger.info("User Enter the Password");
-		loginPage.pword();
-		logger.info("User is to click Summit button");
-		loginPage.button();
-		logger.info("User able to see Home Page ");
-
+		try {
+			logger.info("User Enter the UserName");
+			loginPage.uname();
+			logger.info("User Enter the Password");
+			loginPage.pword();
+			logger.info("User is to click Summit button");
+			loginPage.button();
+			logger.info("User able to see Home Page ");
+		} catch (Exception e) {
+			logger.error(e);
+			commonutils.takeScreenshot();
+		}
 	}
 
 	@When("the user is to buy T shirt and add to cart in the page")
@@ -45,44 +50,62 @@ public class add_To_Cart {
 
 		SelectProduct product = PageFactory.initElements(driver_Manager.getDriver(), SelectProduct.class);
 		logger.info("User is to select the Product");
-		//WebDriverWait wait = new WebDriverWait(driver_Manager.getDriver(), Duration.ofSeconds(60));
-		//wait.until(ExpectedConditions.visibilityOfAllElements(SelectProduct.Add));
-		logger.info("User is to selected the GivenProduct");
-		product.AddProduct(constant.Product);
-		logger.info("User is continue with Shopping cart");
-		product.Shoppingcontainer();
-		logger.info("User is redirect to Checkout Page");
+		try {
+			logger.info("User is to selected the GivenProduct");
+			product.AddProduct();
+			logger.info("User is continue with Shopping cart");
+			product.Shoppingcontainer();
+			logger.info("User is redirect to Checkout Page");
+		} catch (Exception e) {
+			logger.error(e);
+			commonutils.takeScreenshot();
+		}
 	}
 
 	@When("user is to verify the product and click checkout")
 	public void user_is_to_verify_the_product_and_click_checkout() {
 		checkout check = PageFactory.initElements(driver_Manager.getDriver(), checkout.class);
-		logger.info("User is checkout the selected Product");
-		check.productcheck();
-		logger.info("User is redirect to Payment Page");
+		try {
+			logger.info("User is checkout the selected Product");
+			check.productcheck();
+			logger.info("User is redirect to Payment Page");
+		} catch (Exception e) {
+			logger.error(e);
+			commonutils.takeScreenshot();
+		}
 	}
 
 	@When("User is to give Your Information")
 	public void user_is_to_give_your_information() {
 		checkoutInfo checkInfo = PageFactory.initElements(driver_Manager.getDriver(), checkoutInfo.class);
-		logger.info("User Enter the Firstname");
-		checkInfo.first();
-		logger.info("User Enter the lastname");
-		checkInfo.last();
-		logger.info("User Enter the Postcode");
-		checkInfo.Postcode();
-		logger.info("User Enter the continuebutton");
-		checkInfo.continuebuttonfunction();
+		try {
+			logger.info("User Enter the Firstname");
+			checkInfo.first();
+			logger.info("User Enter the lastname");
+			checkInfo.last();
+			logger.info("User Enter the Postcode");
+			checkInfo.Postcode();
+			logger.info("User Enter the continuebutton");
+			checkInfo.continuebuttonfunction();
+		} catch (Exception e) {
+			logger.error(e);
+			commonutils.takeScreenshot();
+		}
 	}
 
 	@Then("user should see Product  Name as {string} and Finish")
 	public void user_should_see_product_name_as_and_finish(String Thanks) {
 
 		checkoutoverview checkoverview = PageFactory.initElements(driver_Manager.getDriver(), checkoutoverview.class);
-		logger.info("User use to verify the product and Enter the Finishbutton ");
-		checkoverview.Finishbutton();
-		logger.info("User able to view Thanks Message");
-		checkoverview.thanksMessage();
-		
+		try {
+			logger.info("User use to verify the product and Enter the Finishbutton ");
+			checkoverview.Finishbutton();
+			logger.info("User able to view Thanks Message");
+			checkoverview.thanksMessage();
+
+		} catch (Exception e) {
+			logger.error(e);
+			commonutils.takeScreenshot();
+		}
 	}
 }

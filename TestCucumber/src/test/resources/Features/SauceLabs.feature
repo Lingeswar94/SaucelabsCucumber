@@ -17,14 +17,19 @@
 ## (Comments)
 #Sample Feature Definition Template
 
-Feature: Title of your feature
+Feature: Title of Swag Labs 
   I want to use this add cart for my feature file
 
-   Scenario Outline: This test is to verify ecommerce page
-    Given the user is to login successfuly and viewing HomePage
-    When the user is to buy T shirt and add to cart in the page
-    And user is to verify the product and click checkout 
-    And User is to give Your Information 
+   Scenario Outline: This test is to verify Swag Labs ecommerce page
+    Given Login with Valid Crenditial "<Username>" and "<Password>"
+    When user is want to buy product and add to cart 
+    When User is to verify the product and continue to checkout 
+    And User is to given details 
+    |Firstname|Lastname|Pincode|
+    |Lingeswar|AK      |641001 |
     Then user should see Product  Name as "Thank you for your order!" and Finish
 
-  
+    Examples: 
+      | Username      | Password |
+      | standard_user |     secret_sauce | 
+      

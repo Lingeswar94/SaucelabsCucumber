@@ -8,9 +8,13 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;
+import javax.swing.text.DateFormatter;
 
 import org.openqa.selenium.support.PageFactory;
 
@@ -45,7 +49,14 @@ public class Commonutils {
 
 	}
 
-	public void takeScreenshot() {
+	public String takeScreenshot() {
+
+		String screenshot = System.getProperty("user.dir") + "/src/test/resources/Screenshot/Sauce"+getcurrentdate()+".png";
+
+		File directory = new File(screenshot);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
 		Robot robot = null;
 		try {
 			robot = new Robot();
@@ -56,15 +67,22 @@ public class Commonutils {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		Rectangle rectangle = new Rectangle(dimension);
 		BufferedImage image = robot.createScreenCapture(rectangle);
-		File file=new File(System.getProperty("user.dir")+"/Screenshot/Sauce.png");
+		File file = new File(screenshot);
 		try {
 			ImageIO.write(image, "png", file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return screenshot;
 
+	}
+
+	public static String getcurrentdate() {
+		DateFormat dateFormat = new SimpleDateFormat("_MM_dd_yyyy_HH_mm_ss");
+		Date date = new Date();
+		String currentdate = dateFormat.format(date);
+		return currentdate;
 	}
 
 }

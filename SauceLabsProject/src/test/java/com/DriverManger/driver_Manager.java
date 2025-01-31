@@ -7,8 +7,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.Constant.constant;
-
-
+import com.Step_Definition.common_function;
+import com.Ultity.Commonutils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -16,6 +16,7 @@ public class driver_Manager {
 
 	private static WebDriver driver=null;
 	
+
 	static Logger logger = Logger.getLogger(driver_Manager.class);
 	public static void lanuchBrowser() {
 		try {
@@ -43,7 +44,10 @@ public class driver_Manager {
 		}
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			logger.error(e);
+			Commonutils commonutils=new Commonutils();
+			commonutils.takeScreenshot();
+		
 		}
 		
 		driver.manage().window().maximize();

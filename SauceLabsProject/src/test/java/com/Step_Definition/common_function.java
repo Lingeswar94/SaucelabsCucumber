@@ -11,7 +11,7 @@ import io.cucumber.java.Before;
 public class common_function {
 
 	public static WebDriver driver;
-
+	Commonutils commonutils=new Commonutils();
 	Logger logger = Logger.getLogger(common_function.class);
 
 	@Before
@@ -19,7 +19,7 @@ public class common_function {
 		logger.info("SauceLabs Test Executed Started");
 		try {
 			logger.info("Instantiation the CommonUtils");
-			Commonutils commonutils = new Commonutils();
+			//Commonutils commonutils = new Commonutils();
 			logger.info("Properties file is loading");
 			commonutils.loadproperties();
 			logger.info("Check driver is null or not");
@@ -29,8 +29,8 @@ public class common_function {
 			}
 		} catch (Exception e) {
 			
-			e.printStackTrace();
-			
+			logger.error(e);
+			commonutils.takeScreenshot();
 		}
 	}
 
